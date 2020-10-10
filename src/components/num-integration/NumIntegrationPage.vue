@@ -2,7 +2,8 @@
     <div>
         <NavigationBar></NavigationBar>
         <Chart :chart-data="dataForChart"></Chart>
-        <Settings v-on:create-graph="createGraph"></Settings>
+        <Settings v-on:create-graph="createGraph"
+                  :numericalIntegral="this.integralValue"></Settings>
     </div>
 </template>
 
@@ -10,13 +11,15 @@
     import NavigationBar from "@/components/NavigationBar";
     import Settings from "@/components/num-integration/Settings";
     import Chart from "@/components/num-integration/LineChart";
-    import {getValuesFunction, getXValuesIntegralRectangles} from "./integral"
+    import {getPointsFunction, getPointsRectangles} from "./integral"
+    import {getIntegral} from "@/components/num-integration/integral";
     export default {
         name: "NumIntegrationPage",
         components: {Chart, Settings, NavigationBar},
         data() {
             return {
-                dataForChart: {}
+                dataForChart: {},
+                integralValue: 0,
 
             }
         },
@@ -27,33 +30,47 @@
 
             },
 
+            getTypeSteppedLine(methodNumericalIntegration) {
+                switch (methodNumericalIntegration) {
+                    case 'left':
+                        return 'before'
+                    case 'right':
+                        return 'after'
+                    case 'middle':
+                        return 'middle'
+
+                }
+
+            },
+
             fillData(setting) {
-                const labels = []
-                const min = setting.integrationLimit.low,
-                    max = setting.integrationLimit.high;
-                for (let i = min; i <= max; i++)
-                    labels.push(i)
-                const values = getValuesFunction(labels, setting.graphFunction);
-                const labelsForRects = getXValuesIntegralRectangles(min, max, setting.countInterval)
-                const valuesRects = getValuesFunction(labelsForRects, setting.graphFunction)
+                const min = Number(setting.integrationLimit.low),
+                    max = Number(setting.integrationLimit.high),
+                    countInterval = Number(setting.countInterval);
+
+                const points = getPointsFunction(setting.graphFunction, min, max);
+                const pointsRects = getPointsRectangles(setting.graphFunction,
+                    min, max, countInterval, setting.methodNumericalIntegration)
+                this.integralValue = getIntegral(min, max, countInterval, pointsRects);
 
 
                 this.dataForChart = {
-                    labels: labels,
                     datasets: [
                         {
                             label: 'Функция',
                             borderColor: '#f87979',
-                            data: values,
-                            fill: false
+                            data: points,
+                            fill: false,
+                            showLine: true,
 
                         },
                         {
                             label: 'Прямоугольнки',
                             borderColor: '#23f11c',
-                            data: valuesRects,
+                            data: pointsRects,
                             fill: false,
-                            steppedLine: true,
+                            steppedLine: this.getTypeSteppedLine(setting.methodNumericalIntegration),
+                            showLine: true,
                         }
                     ]
                 }

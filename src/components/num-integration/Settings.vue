@@ -52,7 +52,7 @@
                     <input aria-label="count-interval"
                            type="number"
                            :value="numericalIntegral"
-                           readonly>
+                           >
                 </div>
             </div>
             <div class="setting">
@@ -94,7 +94,7 @@
                     options: [
                         {value: 'left', text: 'Формула левых прямоугольников'},
                         {value: 'right', text: 'Формула правых прямоугольников'},
-                        {value: 'middle', text: 'Формула средний прямоугольников'}
+                        {value: 'middle', text: 'Формула средних прямоугольников'}
                     ]
                 },
                 countInterval: 30,
