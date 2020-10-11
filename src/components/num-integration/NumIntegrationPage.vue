@@ -59,7 +59,7 @@
             },
 
             createGraphAccuracy(setting) {
-                const minCountInterval = 1;
+                const minCountInterval = 10;
                 const maxCountInterval = 100;
                 const min = Number(setting.integrationLimit.low),
                     max = Number(setting.integrationLimit.high);

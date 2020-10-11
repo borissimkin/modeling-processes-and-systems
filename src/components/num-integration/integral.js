@@ -70,18 +70,18 @@ export const getPointsRectangles = (typeFunction, min, max, countInterval, typeM
 const getPointsLeftRectangles = (typeFunction, min, max, countInterval) => {
     const mathFunction = getMathFunctionByType(typeFunction);
     const step = getStep(countInterval, min, max);
-    const points = []
-    let count = 0
-    for (let i = min; i < max; i += step) {
-        count++
+    const points = [];
+    let value = min;
+    for (let i = 0; i < countInterval; i++)
+    {
         points.push(
             {
-                x: i,
-                y: mathFunction(i)
+                x: value,
+                y: mathFunction(value)
             }
         )
+        value += step;
     }
-    console.log(count);
     return points;
 
 }
@@ -90,17 +90,17 @@ const getPointsRightRectangles = (typeFunction, min, max, countInterval) => {
     const mathFunction = getMathFunctionByType(typeFunction);
     const step = getStep(countInterval, min, max);
     const points = []
-    let count = 0;
-    for (let i = min+step; i <= max+step; i += step) {
-        count++;
+    let value = min+step;
+    for (let i = 0; i < countInterval; i++)
+    {
         points.push(
             {
-                x: i,
-                y: mathFunction(i)
+                x: value,
+                y: mathFunction(value)
             }
         )
+        value += step;
     }
-    console.log(count);
     return points;
 }
 
@@ -108,18 +108,17 @@ const getPointsMiddleRectangles = (typeFunction, min, max, countInterval) => {
     const mathFunction = getMathFunctionByType(typeFunction);
     const step = getStep(countInterval, min, max);
     const points = []
-    let count = 0;
-
-    for (let i = min; i < max; i += step) {
-        count += 1
+    let value = min;
+    for (let i = 0; i < countInterval; i++)
+    {
         points.push(
             {
-                x: i,
-                y: step / 2 + mathFunction(i)
+                x: value,
+                y: step / 2 + mathFunction(value)
             }
         )
+        value += step;
     }
-    console.log(count);
     return points;
 }
 
