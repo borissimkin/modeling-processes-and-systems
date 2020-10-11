@@ -68,7 +68,7 @@
                             label: 'Прямоугольнки',
                             borderColor: '#23f11c',
                             data: pointsRects,
-                            fill: false,
+                            fill: true,
                             steppedLine: this.getTypeSteppedLine(setting.methodNumericalIntegration),
                             showLine: true,
                         }

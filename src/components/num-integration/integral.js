@@ -52,7 +52,9 @@ const getPointsLeftRectangles = (typeFunction, min, max, countInterval) => {
     const mathFunction = getMathFunctionByType(typeFunction);
     const step = getStep(countInterval, min, max);
     const points = []
+    let count = 0
     for (let i = min; i < max; i += step) {
+        count++
         points.push(
             {
                 x: i,
@@ -60,6 +62,7 @@ const getPointsLeftRectangles = (typeFunction, min, max, countInterval) => {
             }
         )
     }
+    console.log(count);
     return points;
 
 }
@@ -68,7 +71,9 @@ const getPointsRightRectangles = (typeFunction, min, max, countInterval) => {
     const mathFunction = getMathFunctionByType(typeFunction);
     const step = getStep(countInterval, min, max);
     const points = []
-    for (let i = min+step; i <= max; i += step) {
+    let count = 0;
+    for (let i = min+step; i <= max+step; i += step) {
+        count++;
         points.push(
             {
                 x: i,
@@ -76,6 +81,7 @@ const getPointsRightRectangles = (typeFunction, min, max, countInterval) => {
             }
         )
     }
+    console.log(count);
     return points;
 }
 
@@ -83,7 +89,10 @@ const getPointsMiddleRectangles = (typeFunction, min, max, countInterval) => {
     const mathFunction = getMathFunctionByType(typeFunction);
     const step = getStep(countInterval, min, max);
     const points = []
-    for (let i = min+step; i <= max; i += step) {
+    let count = 0;
+
+    for (let i = min; i < max; i += step) {
+        count += 1
         points.push(
             {
                 x: i,
@@ -91,6 +100,7 @@ const getPointsMiddleRectangles = (typeFunction, min, max, countInterval) => {
             }
         )
     }
+    console.log(count);
     return points;
 }
 
