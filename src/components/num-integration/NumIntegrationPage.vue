@@ -3,6 +3,7 @@
         <NavigationBar></NavigationBar>
         <Chart :chart-data="dataForChart"></Chart>
         <Settings v-on:create-graph="createGraph"
+                  v-on:create-graph-accuracy-integration="createGraphAccuracy"
                   :numericalIntegral="this.integralValue"></Settings>
     </div>
 </template>
@@ -11,7 +12,7 @@
     import NavigationBar from "@/components/NavigationBar";
     import Settings from "@/components/num-integration/Settings";
     import Chart from "@/components/num-integration/LineChart";
-    import {getPointsFunction, getPointsRectangles} from "./integral"
+    import {getPointsFunction, getPointsRectangles, getPointsAccuracyGraph} from "./integral"
     import {getIntegral} from "@/components/num-integration/integral";
     export default {
         name: "NumIntegrationPage",
@@ -25,25 +26,6 @@
         },
         methods: {
             createGraph(setting) {
-                console.log(setting);
-                this.fillData(setting)
-
-            },
-
-            getTypeSteppedLine(methodNumericalIntegration) {
-                switch (methodNumericalIntegration) {
-                    case 'left':
-                        return 'before'
-                    case 'right':
-                        return 'after'
-                    case 'middle':
-                        return 'middle'
-
-                }
-
-            },
-
-            fillData(setting) {
                 const min = Number(setting.integrationLimit.low),
                     max = Number(setting.integrationLimit.high),
                     countInterval = Number(setting.countInterval);
@@ -52,7 +34,6 @@
                 const pointsRects = getPointsRectangles(setting.graphFunction,
                     min, max, countInterval, setting.methodNumericalIntegration)
                 this.integralValue = getIntegral(min, max, countInterval, pointsRects);
-
 
                 this.dataForChart = {
                     datasets: [
@@ -74,7 +55,46 @@
                         }
                     ]
                 }
-            }
+
+            },
+
+            createGraphAccuracy(setting) {
+                const minCountInterval = 1;
+                const maxCountInterval = 100;
+                const min = Number(setting.integrationLimit.low),
+                    max = Number(setting.integrationLimit.high);
+                const points = getPointsAccuracyGraph(setting.graphFunction, setting.methodNumericalIntegration,
+                    {max, min}, {max: maxCountInterval, min: minCountInterval})
+                this.dataForChart = {
+                    datasets: [
+                        {
+                            label: 'ФВФЦВФЦв',
+                            borderColor: '#f87979',
+                            data: points,
+                            fill: false,
+                            showLine: true,
+
+
+                        }
+                    ]
+                }
+
+
+
+            },
+
+            getTypeSteppedLine(methodNumericalIntegration) {
+                switch (methodNumericalIntegration) {
+                    case 'left':
+                        return 'before'
+                    case 'right':
+                        return 'after'
+                    case 'middle':
+                        return 'middle'
+
+                }
+
+            },
 
 
         },

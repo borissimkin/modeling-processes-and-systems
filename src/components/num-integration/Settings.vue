@@ -59,6 +59,9 @@
                 <button @click="createGraph">
                     График целевой функции
                 </button>
+                <button @click="createGraphAccuracyIntegration">
+                    График зависимости точности интегрирования от количества интервалов разбиения
+                </button>
 
             </div>
         </div>
@@ -108,6 +111,15 @@
                     integrationLimit: this.integrationLimit,
                     methodNumericalIntegration: this.methodNumericalIntegration.selected,
                     countInterval: this.countInterval
+                })
+            },
+
+            createGraphAccuracyIntegration() {
+                this.$emit('create-graph-accuracy-integration', {
+                    graphFunction: this.graphFunction.selected,
+                    integrationLimit: this.integrationLimit,
+                    methodNumericalIntegration: this.methodNumericalIntegration.selected
+
                 })
             }
         }

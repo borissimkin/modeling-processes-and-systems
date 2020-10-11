@@ -30,6 +30,25 @@ const getMathFunctionByType = (typeFunction) => {
     return mathFunction
 }
 
+export const getPointsAccuracyGraph = (typeFunction, typeMethodIntegration, limitsIntegration, limitsCountsInterval) => {
+    const points = []
+    for (let i = limitsCountsInterval.min; i <= limitsCountsInterval.max; i++)
+    {
+        let pointsRectangles = getPointsRectangles(typeFunction, limitsIntegration.min, limitsIntegration.max, i, typeMethodIntegration)
+        let trueIntegral = getTrueIntegral(typeFunction, limitsIntegration)
+        let integralRectangles = getIntegral(limitsIntegration.min, limitsIntegration.max, i, pointsRectangles)
+        let errorValue = trueIntegral / integralRectangles * 100;
+        points.push(
+            {
+                x: i,
+                y: errorValue
+            }
+        )
+    }
+    return points;
+
+}
+
 const getStep = (countInterval, min, max) => {
     return (max - min) / countInterval;
 
@@ -109,6 +128,31 @@ export const getIntegral = (min, max, countInterval, points) => {
     return points.reduce((accumulator, point) => {
         return accumulator + point.y * step
     }, 0)
+
+}
+
+export const getTrueIntegral = (typeFunction, limitsIntegration) => {
+    let min = limitsIntegration.min,
+        max = limitsIntegration.max;
+    let valueIntegralMin,
+        valueIntegralMax;
+    switch (typeFunction) {
+        case 'square':
+            valueIntegralMin = min*min*min / 3;
+            valueIntegralMax = max*max*max / 3;
+            break;
+        case 'sinus':
+            valueIntegralMin =  -Math.cos(min);
+            valueIntegralMax = -Math.cos(max);
+            break;
+        case 'h-sinus':
+            valueIntegralMin = Math.cosh(min);
+            valueIntegralMax = Math.cosh(max);
+            break;
+
+
+    }
+    return valueIntegralMax - valueIntegralMin;
 
 }
 
