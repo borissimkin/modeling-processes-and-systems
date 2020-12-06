@@ -11,7 +11,7 @@
 <script>
     import NavigationBar from "@/components/NavigationBar";
     import Settings from "@/components/num-integration/Settings";
-    import Chart from "@/components/num-integration/LineChart";
+    import Chart from "@/components/LineChart";
     import {getPointsFunction, getPointsRectangles, getPointsAccuracyGraph} from "./integral"
     import {getIntegral} from "@/components/num-integration/integral";
     export default {
