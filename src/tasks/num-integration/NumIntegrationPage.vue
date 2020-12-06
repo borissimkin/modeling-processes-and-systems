@@ -9,11 +9,11 @@
 </template>
 
 <script>
-    import NavigationBar from "@/components/NavigationBar";
-    import Settings from "@/components/num-integration/Settings";
-    import Chart from "@/components/LineChart";
+    import NavigationBar from "@/tasks/NavigationBar";
+    import Settings from "@/tasks/num-integration/Settings";
+    import Chart from "@/tasks/LineChart";
     import {getPointsFunction, getPointsRectangles, getPointsAccuracyGraph} from "./integral"
-    import {getIntegral} from "@/components/num-integration/integral";
+    import {getIntegral} from "@/tasks/num-integration/integral";
     export default {
         name: "NumIntegrationPage",
         components: {Chart, Settings, NavigationBar},
@@ -68,7 +68,7 @@
                 this.dataForChart = {
                     datasets: [
                         {
-                            label: 'ФВФЦВФЦв',
+                            label: 'График зависимости точности интегрирования от количества интервалов разбиения',
                             borderColor: '#f87979',
                             data: points,
                             fill: false,

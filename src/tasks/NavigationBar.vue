@@ -9,6 +9,9 @@
     <b-navbar-brand to="/particle-scattering">
       Рассеяние частиц
     </b-navbar-brand>
+    <b-navbar-brand to="/population-dynamics">
+      Динамика популяций
+    </b-navbar-brand>
   </b-navbar>
 </template>
 

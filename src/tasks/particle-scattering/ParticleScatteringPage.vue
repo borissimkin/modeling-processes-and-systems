@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import ParticleScatteringSettings from "@/components/particle-scattering/ParticleScatteringSettings";
-import Chart from "@/components/LineChart";
-import NavigationBar from "@/components/NavigationBar";
-import {calculateShoot} from "@/components/particle-scattering/shoot";
+import ParticleScatteringSettings from "@/tasks/particle-scattering/ParticleScatteringSettings";
+import Chart from "@/tasks/LineChart";
+import NavigationBar from "@/tasks/NavigationBar";
+import {calculateShoot} from "@/tasks/particle-scattering/shoot";
 
 export default {
   name: "ParticleScatteringPage",
@@ -54,5 +54,6 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>

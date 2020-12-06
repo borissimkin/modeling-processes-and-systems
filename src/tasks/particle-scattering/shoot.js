@@ -1,4 +1,4 @@
-import {Constants} from "@/components/particle-scattering/consts";
+import {Constants} from "@/tasks/particle-scattering/consts";
 
 const step = 0.0000000001;
 
@@ -16,7 +16,8 @@ export const calculateShoot = (particleType, startingSpeed, sightingParameter) =
     let particleCharge = getChargeParticle(particleType);
     let particleMass = getMassParticle(particleType);
 
-
+    // let E_I = Math.pow(10, -14);
+    // let Y_I = 3;
 
     for (let i = 0; i < 100; i++) { // todo: условие пока частица не улетела далеко кудато
         let currentPoint = points[i];
