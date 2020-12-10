@@ -35,7 +35,7 @@
         </label>
       </div>
       <div class="settings__container">
-        <div class="settings__container-title">Несущая способность окружающей среды для хищников <b>s</b></div>
+        <div class="settings__container-title">коэффициент эффективности переработки поглощенной хищником пищи в его потомство <b>s</b></div>
         <label>
           <input v-model="s" type="number">
         </label>
