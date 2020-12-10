@@ -51,11 +51,11 @@ export default {
   name: "PopulationDynamicsSettings",
   data() {
     return {
-      startCountVictims: 10,
-      startCountPredators: 10,
+      startCountVictims: 9,
+      startCountPredators: 1,
       r: 1,
-      s: 1,
-      k: 1,
+      s: 0.1,
+      k: 0.3,
       m: 1,
 
     }
