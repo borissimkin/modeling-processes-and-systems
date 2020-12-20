@@ -1,57 +1,53 @@
 import {Constants} from "@/tasks/particle-scattering/consts";
 
-const step = 0.0000000001;
 
 export const calculateShoot = (particleType, startingSpeed, sightingParameter) => {
-    console.log({particleType, sightingParameter, startingSpeed});
     const points = [];
-    let beginPoint = {x: 0, y: sightingParameter};
+    let beginPoint = {x: 0, y: sightingParameter * Constants.EI};
     points.push(beginPoint);
-    let dt = step;
 
     let vX = startingSpeed;
     let vY = 0;
     let aX = 0;
     let aY = 0
-    let particleCharge = getChargeParticle(particleType);
-    let particleMass = getMassParticle(particleType);
+    let Q = getChargeParticle(particleType);
+    let M = getMassParticle(particleType);
 
-    // let E_I = Math.pow(10, -14);
-    // let Y_I = 3;
-
-    for (let i = 0; i < 100; i++) { // todo: условие пока частица не улетела далеко кудато
+    let i = 0;
+    while (points[i].x >= 0 && points[i].x < Constants.EI * 4 && points[i].y > -Constants.EI * Constants.YI && points[i].y < Constants.EI * Constants.YI) {
         let currentPoint = points[i];
-        let x = currentPoint.x -1;
+        let x = currentPoint.x;
         let y = currentPoint.y;
 
-        let r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) / 1000000;
-        let f = Constants.k * (particleCharge * Constants.ferumCharge() / Math.pow(r, 2))
-        let a = f / particleMass;
+        let r = Math.sqrt(Math.pow(x - (3 * Constants.EI), 2) + Math.pow(y, 2));
+        let a = (Constants.K * Q * Constants.Q_FERUM() / Math.pow(r, 2)) / M;
 
-        aX = a * (Math.abs(x) / r); // cos
+        aX = a * (Math.abs(x - (3 * Constants.EI)) / r); // cos
         aY = a * (y / r); // sin
 
-        vX += aX * dt;
-        vY += aY * dt;
+        vX -= aX * Constants.DT;
+        vY += aY * Constants.DT;
 
         points.push({
-            x: currentPoint.x + vX * dt,
-            y: currentPoint.y + vY * dt
+            x: currentPoint.x + vX * Constants.DT,
+            y: currentPoint.y + vY * Constants.DT
         })
+        i++;
     }
     return points;
 
 
 }
 
+
 function getChargeParticle(particleType) {
     switch (particleType) {
         case 'proton':
-            return Constants.protonCharge;
+            return Constants.Q_PROTON;
         case 'electron':
-            return Constants.electronCharge;
+            return Constants.Q_ELECTRON();
         case 'alpha':
-            return Constants.alphaParticleCharge;
+            return Constants.Q_ALPHA;
     }
 
 }
@@ -59,10 +55,10 @@ function getChargeParticle(particleType) {
 function getMassParticle(particleType) {
     switch (particleType) {
         case 'proton':
-            return Constants.protonParticleMass;
+            return Constants.M_PROTON;
         case 'electron':
-            return Constants.electronParticleMass;
+            return Constants.M_ELECTRON;
         case 'alpha':
-            return Constants.alphaParticleMass;
+            return Constants.M_ALPHA;
     }
 }

@@ -8,7 +8,7 @@ export const population = (settings) => {
     const pointsVictim = []
     const pointsPredator = []
     const h = 0.1;
-    pointsPredator.push({x: 0 ,y: settings.startCountPredators})
+    pointsPredator.push({x: 0, y: settings.startCountPredators})
     pointsVictim.push({x: 0, y: settings.startCountVictims})
 
     let victimWasZero = false;
@@ -25,7 +25,6 @@ export const population = (settings) => {
             if (Y === 0)
                 predatorsWasZero = true
         }
-        console.log(Y);
 
         let dx = ((settings.r * settings.k * (X + h) - settings.s * (X + h) * Y) -
             (settings.r * settings.k * (X - h) - settings.s * (X - h) * Y)) / 2 * h

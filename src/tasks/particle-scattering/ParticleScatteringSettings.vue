@@ -25,7 +25,8 @@
         </label>
       </div>
     </div>
-    <button @click="shoot">Стрелять!</button>
+    <button @click="shoot">График траектории полёта частицы при заданных начальных условиях</button>
+    <button @click="dependenciesAngles">Графки зависимости угла отклонения (рассеяния) от величины прицельного параметра</button>
   </div>
 
 </template>
@@ -54,7 +55,16 @@ export default {
         startingSpeed: this.startingSpeed,
         sightingParameter: this.sightingParameter,
       }
-      this.$emit('create-graph', settings);
+      this.$emit('shoot', settings);
+    },
+
+    dependenciesAngles() {
+      let settings = {
+        particleType: this.particleType.selected,
+        startingSpeed: this.startingSpeed,
+        sightingParameter: this.sightingParameter,
+      }
+      this.$emit('dependencies', settings);
     }
   }
 }
