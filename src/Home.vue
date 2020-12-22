@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import NavigationBar from "@/components/NavigationBar";
+    import NavigationBar from "@/tasks/NavigationBar";
     export default {
         name: "Home",
         components: {NavigationBar}
