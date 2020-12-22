@@ -4,6 +4,7 @@ import NumIntegrationPage from "@/tasks/num-integration/NumIntegrationPage";
 import Home from "@/Home";
 import ParticleScatteringPage from "@/tasks/particle-scattering/ParticleScatteringPage";
 import PopulationDynamicsPage from "@/tasks/population-dynamics/PopulationDynamicsPage";
+import SpringLoadPage from "@/tasks/spring-load/SpringLoadPage";
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ let router = new Router({
             path: '/population-dynamics',
             name: 'population-dynamics',
             component: PopulationDynamicsPage
+        },
+        {
+            path: '/spring-load',
+            name: 'spring-load',
+            component: SpringLoadPage,
         }
     ]
 })

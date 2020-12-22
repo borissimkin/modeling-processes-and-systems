@@ -12,8 +12,8 @@
     <b-navbar-brand to="/population-dynamics">
       Динамика популяций
     </b-navbar-brand>
-    <b-navbar-brand to="/population-dynamics">
-      Динамика популяций
+    <b-navbar-brand to="/spring-load">
+      Груз на пружине
     </b-navbar-brand>
   </b-navbar>
 </template>
